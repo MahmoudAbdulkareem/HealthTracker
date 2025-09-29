@@ -7,7 +7,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use Illuminate\Support\Facades\Artisan;
-
+use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\ParticipationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/', fn() => view('dashboard'));
+Route::resource('challenges', ChallengeController::class);
+Route::resource('participations', ParticipationController::class);
 
 // ---------------------- BASIC UI ----------------------
 Route::prefix('basic-ui')->group(function() {
