@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -8,21 +9,30 @@ use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
+    /**
+     * Redirection après la réinitialisation
+     */
+    protected $redirectTo = '/user-pages/login';
+
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    // Show reset password form
+    /**
+     * Affiche le formulaire de réinitialisation
+     */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('pages.user-pages.reset-password')->with([
+        return view('auth.passwords.reset')->with([
             'token' => $token,
             'email' => $request->email,
         ]);
     }
 
-    // Reset the password
+    /**
+     * Réinitialise le mot de passe
+     */
     public function reset(Request $request)
     {
         $request->validate([
@@ -32,16 +42,15 @@ class ResetPasswordController extends Controller
         ]);
 
         $status = Password::reset(
-            $request->only('email','password','password_confirmation','token'),
+            $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->save();
+                $user->password = Hash::make($password);
+                $user->save();
             }
         );
 
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 }

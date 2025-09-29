@@ -39,6 +39,13 @@
         </button>
       </div>
     </li>
+    {{-- Lien vers les utilisateurs --}}
+    <li class="nav-item {{ active_class(['admin/users']) }}">
+      <a class="nav-link" href="{{ url('/admin/users') }}">
+        <i class="menu-icon mdi mdi-account-multiple"></i>
+        <span class="menu-title">Utilisateurs</span>
+      </a>
+    </li>
     <li class="nav-item {{ active_class(['/']) }}">
       <a class="nav-link" href="{{ url('/') }}">
         <i class="menu-icon mdi mdi-television"></i>
@@ -78,12 +85,24 @@
         <span class="menu-title">Tables</span>
       </a>
     </li>
-    <li class="nav-item {{ active_class(['icons/material']) }}">
-      <a class="nav-link" href="{{ url('/icons/material') }}">
-        <i class="menu-icon mdi mdi-emoticon"></i>
-        <span class="menu-title">Icons</span>
-      </a>
-    </li>
+   <li class="nav-item {{ active_class(['user-pages/*']) }}">
+  <a class="nav-link" data-toggle="collapse" href="#user-pages" aria-expanded="{{ is_active_route(['user-pages/*']) }}" aria-controls="user-pages">
+    <i class="menu-icon mdi mdi-calendar"></i> <!-- changed icon here -->
+    <span class="menu-title">Events</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse {{ show_class(['user-pages/*']) }}" id="user-pages">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item {{ active_class(['user-pages/login']) }}">
+        <a class="nav-link" href="{{ url('/participations') }}">Participation</a>
+      </li>
+      <li class="nav-item {{ active_class(['user-pages/register']) }}">
+        <a class="nav-link" href="{{ url('/challenges') }}">Challenge</a>
+      </li>
+    </ul>
+  </div>
+</li>
+
     <li class="nav-item {{ active_class(['user-pages/*']) }}">
       <a class="nav-link" data-toggle="collapse" href="#user-pages" aria-expanded="{{ is_active_route(['user-pages/*']) }}" aria-controls="user-pages">
         <i class="menu-icon mdi mdi-lock-outline"></i>
