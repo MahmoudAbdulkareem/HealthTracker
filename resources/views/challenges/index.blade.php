@@ -5,7 +5,11 @@
 @section('content')
 <div class="d-flex justify-content-between mb-3">
     <h2>Challenges</h2>
-    <a href="{{ route('challenges.create') }}" class="btn btn-primary">Add Challenge</a>
+<a href="{{ route('challenges.create') }}" class="btn btn-success btn-sm d-flex align-items-center justify-content-center" 
+   style="padding: 0.25rem 0.5rem; font-size: 0.75rem; border-width: 1px;">
+    <i class="mdi mdi-plus me-1" style="font-size: 0.8rem;"></i> Add Challenge
+</a>
+
 </div>
 
 <table class="table table-bordered table-striped">
